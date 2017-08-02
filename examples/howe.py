@@ -25,8 +25,8 @@ model.append_element( Bar2([node[2], node[3]], section, material) )
 
 model.append_prescribed_displacement( PrescribedDisplacement( dofs.GlobalDoF(node[0], dofs.Parameter.dx), 0))
 model.append_prescribed_displacement( PrescribedDisplacement( dofs.GlobalDoF(node[0], dofs.Parameter.dy), 0))
-model.append_prescribed_displacement( PrescribedDisplacement( dofs.GlobalDoF(node[3], dofs.Parameter.dx), 0))
-model.append_prescribed_displacement( PrescribedDisplacement( dofs.GlobalDoF(node[3], dofs.Parameter.dy), 0))
+model.append_prescribed_displacement( PrescribedDisplacement( dofs.GlobalDoF(node[2], dofs.Parameter.dx), 0))
+model.append_prescribed_displacement( PrescribedDisplacement( dofs.GlobalDoF(node[2], dofs.Parameter.dy), 0))
 
 analysis = LinearStatic()
 result = analysis.run(model)
