@@ -99,18 +99,19 @@ class LinearStatic:
             self._k_ff = scipy.sparse.dok_matrix( (N_free, N_free))
                 
             # partition k_global through calls to popitem
-            while k_global.getnnz() > 0:
-                key, value = k_global.popitem()
+            # while k_global.getnnz() > 0:
+            for key, value in k_global.items():
+                # key, value = k_global.popitem()
                 global_i, global_j = key
                 
                 if global_i < N_essential:
                     if global_j < N_essential:
                         self._k_ee[ global_i, global_j] = value
                     else:
-                        self._k_fe[ global_i, global_j-N_essential] = value
+                        self._k_ef[ global_i, global_j-N_essential] = value
                 else:
                     if global_j < N_essential:
-                        self._k_ef[ global_i-N_essential, global_j] = value
+                        self._k_fe[ global_i-N_essential, global_j] = value
                     else:
                         self._k_ff[ global_i-N_essential, global_j-N_essential] = value
             
@@ -211,7 +212,7 @@ class LinearStatic:
 
             for local_i, global_i in enumerate(indices):
                 for local_j,global_j in enumerate(indices):
-                    k_global[global_i,global_j] = k_elem[local_i,local_j]
+                    k_global[global_i,global_j] += k_elem[local_i,local_j]
 
         return k_global
 
