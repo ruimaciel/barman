@@ -85,7 +85,7 @@ class Bar2(BarElement):
         """Returns a list with the element's global degrees of freedom (DoF)"""
 
         parameters = [ Parameter.dx, Parameter.dy]
-        global_dofs = [ GlobalDoF(node, parameter) for parameter in parameters for node in self.nodes]
+        global_dofs = [ GlobalDoF(node, parameter) for node in self.nodes for parameter in parameters]
         return global_dofs
 
 
