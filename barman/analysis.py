@@ -230,7 +230,7 @@ class LinearStatic:
 
             global_i = dof_order[global_dofs]
 
-            f_global[global_i] = f_elem
+            f_global[global_i] += f_elem
 
         return f_global
 
@@ -248,7 +248,7 @@ class LinearStatic:
 
             global_i = dof_order[global_dofs]
 
-            d_global[global_i] = d_elem
+            d_global[global_i] += d_elem
 
         return d_global
 
