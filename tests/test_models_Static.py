@@ -14,7 +14,7 @@ class TestLinearElasticMethods(unittest.TestCase):
         
 
     def test_append_element(self):
-        model = models.LinearStatic()
+        model = models.Static()
 
         elem = Bar2(self.nodes, self.section, self.material)
 
