@@ -14,21 +14,10 @@ class TestLinearElasticMethods(unittest.TestCase):
         self.section = sections.Section(1, 1);
         
 
-    def test_append_element(self):
-        model = models.LinearStatic()
-
-        elem = Bar2(self.nodes, self.section, self.material)
-
-        model.append_element(elem)
-        elem = model.elements
-
-        self.assertEqual(len(elem), 1)
-
-
     def test_get_global_dof_map(self):
         """ tests the generation of the GlobalDoF map"""
 
-        model = models.LinearStatic()
+        model = models.Static()
 
         elem = Bar2([self.nodes[0], self.nodes[1]], self.section, self.material)
 
@@ -50,7 +39,7 @@ class TestLinearElasticMethods(unittest.TestCase):
     def test_generate_global_dof_vector(self):
         """ tests the generation of the GlobalDoF map"""
 
-        model = models.LinearStatic()
+        model = models.Static()
 
         elem = Bar2([self.nodes[0], self.nodes[1]], self.section, self.material)
 
@@ -71,7 +60,7 @@ class TestLinearElasticMethods(unittest.TestCase):
     
 
     def test_run(self):
-        model = models.LinearStatic()
+        model = models.Static()
         model.append_element( Bar2([self.nodes[0], self.nodes[1]], self.section, self.material) )
         model.append_element( Bar2([self.nodes[1], self.nodes[2]], self.section, self.material) )
         model.append_element( Bar2([self.nodes[0], self.nodes[2]], self.section, self.material) )

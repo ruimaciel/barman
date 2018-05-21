@@ -16,7 +16,7 @@ node = [
     dofs.Node([2,0]), 
 ]
 
-model = models.LinearStatic()
+model = models.Static()
 model.append_element( Bar2([node[0], node[1]], section, material) )
 model.append_element( Bar2([node[1], node[2]], section, material) )
 model.append_element( Bar2([node[0], node[2]], section, material) )

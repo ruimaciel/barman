@@ -21,8 +21,8 @@ from barman import prescribed_displacements
 from barman import prescribed_forces
 
 
-class LinearStatic:
-    """A linear static analysis model"""
+class Static:
+    """A static analysis model"""
 
     def __init__(self):
         self.clear()
