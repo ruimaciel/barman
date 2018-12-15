@@ -20,7 +20,7 @@
 
 class PrescribedForce:
     """Prescribes the force associated with a global degree of freedom (DoF)"""
-    
+
     def __init__(self, global_dof, value):
         self._global_dof = global_dof
         self._value = value

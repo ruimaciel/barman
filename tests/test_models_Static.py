@@ -11,7 +11,7 @@ class TestLinearElasticMethods(unittest.TestCase):
         self.nodes = [ dofs.Node([0,0]), dofs.Node([1,0]), dofs.Node([1,1]) ]
         self.material = materials.LinearElastic('test', 100, 0.35);
         self.section = sections.Section(1, 1);
-        
+
 
     def test_append_element(self):
         model = models.Static()

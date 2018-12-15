@@ -91,13 +91,13 @@ class LinearStatic:
         self._k_ef = scipy.sparse.dok_matrix( (N_essential, N_free))
         self._k_fe = scipy.sparse.dok_matrix( (N_free, N_essential))
         self._k_ff = scipy.sparse.dok_matrix( (N_free, N_free))
-            
+
         # partition k_global through calls to popitem
         # while k_global.getnnz() > 0:
         for key, value in k_global.items():
             # key, value = k_global.popitem()
             global_i, global_j = key
-            
+
             if global_i < N_essential:
                 if global_j < N_essential:
                     self._k_ee[ global_i, global_j] = value
@@ -108,7 +108,7 @@ class LinearStatic:
                     self._k_fe[ global_i-N_essential, global_j] = value
                 else:
                     self._k_ff[ global_i-N_essential, global_j-N_essential] = value
-        
+
         # convert sparse matrix to data structures that are computationally efficient
         self._k_ee = self._k_ee.tocsr()
         self._k_fe = self._k_fe.tocsr()

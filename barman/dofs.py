@@ -24,7 +24,7 @@ import numpy
 
 class Parameter(Enum):
     """Determines the types of parameters (input and output) supported by barman.
-    
+
     Attributes:
         dx: displacement along the XX axis
         dy: displacement along the YY axis
@@ -56,14 +56,14 @@ class CoordinateSystem:
 
 
     def get_transformation(self):
-        
+
         c = cos(self._angle)
         s = sin(self._angle)
 
         T = numpy.array(
-           [[  c, s, 0],
-            [ -s, c, 0],
-            [  0, 0, 1.0]]
+            [[  c, s, 0],
+             [ -s, c, 0],
+             [  0, 0, 1.0]]
         )
 
         return T
@@ -86,7 +86,7 @@ class Node:
     def __init__(self, position):
         self._position = position
         self._coordinate_system = CoordinateSystem()
-        
+
 
     @property
     def position(self):

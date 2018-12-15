@@ -35,7 +35,7 @@ class Static:
         self._prescribed_displacements = []
         self._prescribed_forces = []
         self._global_dof_links = [] # links between GlobalDoFs
-        
+
 
     def append_element(self, element):
         """Appends an element to the element list"""

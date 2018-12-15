@@ -33,7 +33,7 @@ class BarElement(metaclass=ABCMeta):
         self._nodes = nodes # two nodes: start node, and end node
         self._section = section
         self._material = material
-        
+
 
     @property
     def nodes(self):
@@ -105,7 +105,7 @@ class Bar2(BarElement):
         N = numpy.array([1-x/L, x/L]);
 
         return N
-        
+
 
     def get_local_stiffness_matrix(self):
         """Returns the element's stiffness matrix represented in the local coordinate system"""
@@ -124,13 +124,13 @@ class Bar2(BarElement):
 
     def get_local_mass_matrix(self):
         """Returns the element's mass matrix represented in the local coordinate system"""
-        
+
         A = self.section.area
         rho = self.material.density
         L = self.get_length()
-        
+
         rAL6 = rho*A*L/6.0
-        
+
         m = rAL6*numpy.array(
             [[  2.0,  1.0],
              [  1.0,  2.0]]
@@ -186,14 +186,14 @@ class EulerBernoulli(BarElement):
         xi = x/L
 
         N = numpy.array([1-xi,
-        1-3*xi**2 + 2*xi**3,
-        L*(xi - 2*xi**2 + xi**3),
-        xi,
-        3*xi**2 - 2*xi**3,
-        L*(3*xi**3-x**2) ])
+                         1-3*xi**2 + 2*xi**3,
+                         L*(xi - 2*xi**2 + xi**3),
+                         xi,
+                         3*xi**2 - 2*xi**3,
+                         L*(3*xi**3-x**2) ])
 
         return N
-        
+
 
     def get_local_stiffness_matrix(self):
         """Returns the element's stiffness matrix represented in the local coordinate system"""
@@ -204,13 +204,13 @@ class EulerBernoulli(BarElement):
         L = self.get_length()
 
         k = numpy.array(
-           [ 
-            [   EA/L,        0,           0,      -EA/L,      0,           0       ],
-            [    0,      12*EI/L**3,   6*EI/L**2,   0,   -12*EI/L**3,   6*EI/L**2  ],
-            [    0,       6*EI/L**2,   4*EI/L,      0,    -6*EI/L**2,   2*EI/L     ],
-            [  -EA/L,        0,           0,       EA/L,      0,           0       ],
-            [    0,     -12*EI/L**3,  -6*EI/L**2,   0,    12*EI/L**3,  -6*EI/L**2  ],
-            [    0,       6*EI/L**2,   2*EI/L,      0,    -6*EI/L**2,   4*EI/L     ]]
+            [ 
+                [   EA/L,        0,           0,      -EA/L,      0,           0       ],
+                [    0,      12*EI/L**3,   6*EI/L**2,   0,   -12*EI/L**3,   6*EI/L**2  ],
+                [    0,       6*EI/L**2,   4*EI/L,      0,    -6*EI/L**2,   2*EI/L     ],
+                [  -EA/L,        0,           0,       EA/L,      0,           0       ],
+                [    0,     -12*EI/L**3,  -6*EI/L**2,   0,    12*EI/L**3,  -6*EI/L**2  ],
+                [    0,       6*EI/L**2,   2*EI/L,      0,    -6*EI/L**2,   4*EI/L     ]]
         )
 
         return k
@@ -218,21 +218,21 @@ class EulerBernoulli(BarElement):
 
     def get_local_mass_matrix(self):
         """Returns the element's mass matrix represented in the local coordinate system"""
-        
+
         A = self.section.area
         rho = self.material.density
         L = self.get_length()
-        
+
         rAL420 = rho*A*L/420.0
-        
+
         m = rAL420*numpy.array(
             [
-             [140.0,    0.0,     0.0,       70.0,     0.0,       0.0     ],
-             [  0.0,  156.0,    22.0*L,      0.0,    54.0,     -13.0*L   ],
-             [  0.0,   22.0*L,   4.0*L*L,    0.0,    13.0*L,    -3.0*L*L ],
-             [ 70.0,    0.0,     0.0,      140.0,     0.0,       0.0     ],
-             [  0.0,   54.0,    13.0*L,      0.0,   156.0,     -22.0*L   ],
-             [  0.0,  -13.0*L,  -3.0*L*L,    0.0,   -22.0*L,     4.0*L*L ]]
+                [140.0,    0.0,     0.0,       70.0,     0.0,       0.0     ],
+                [  0.0,  156.0,    22.0*L,      0.0,    54.0,     -13.0*L   ],
+                [  0.0,   22.0*L,   4.0*L*L,    0.0,    13.0*L,    -3.0*L*L ],
+                [ 70.0,    0.0,     0.0,      140.0,     0.0,       0.0     ],
+                [  0.0,   54.0,    13.0*L,      0.0,   156.0,     -22.0*L   ],
+                [  0.0,  -13.0*L,  -3.0*L*L,    0.0,   -22.0*L,     4.0*L*L ]]
         )
 
         return m
@@ -258,7 +258,7 @@ class EulerBernoulli(BarElement):
              [ 0, 0, 0,  c, s, 0],
              [ 0, 0, 0, -s, c, 0],
              [ 0, 0, 0,  0, 0, 1]]
-             )
+        )
 
         return T
 

@@ -23,7 +23,7 @@ class TestNodeMethods(unittest.TestCase):
         position = [0, 0]
 
         node = dofs.Node(position)
-        
+
         self.assertEqual(position, node.position)
 
 

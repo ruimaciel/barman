@@ -50,7 +50,7 @@ class LinearStatic:
 
     def get_global_dof_map(self, model):
         """Returns a map with the GlobalDoF indices"""
-        
+
         dof_order = dict()
         essential_global_dofs = set()
 
