@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='barman',
-    version='0.1.0',
+    version='1.0.0',
     description='A 2D engineering beam theory model implemente in Python 3',
     packages=['barman'],
     author='Rui Maciel',
