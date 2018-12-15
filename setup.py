@@ -20,6 +20,10 @@ setup(name='barman',
             'Topic :: Scientific/Engineering',
             'Topic :: Scientific/Engineering :: Physics',
             'Topic :: Software Development :: Libraries'
-      ]
+      ],
+      install_requires=[
+            'numpy>=1.14,<2.0',
+            'scipy>=1.1,<2.0',
+      ],
 )
 
