@@ -22,15 +22,15 @@ class Section:
     """The cross-section of a bar element"""
 
 
-    def __init__(self, area, I_zz):
-        self._area = area
-        self._I_zz = I_zz
+    def __init__(self, area: float, I_zz: float):
+        self._area: float = area
+        self._I_zz: float = I_zz
 
     @property
-    def area(self):
+    def area(self) -> float:
         return self._area
 
     @property
-    def I_zz(self):
+    def I_zz(self) -> float:
         return self._I_zz
 

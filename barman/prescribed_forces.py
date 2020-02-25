@@ -17,16 +17,17 @@
     along with Barman.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+from barman.dofs import GlobalDoF
 
 class PrescribedForce:
     """Prescribes the force associated with a global degree of freedom (DoF)"""
 
-    def __init__(self, global_dof, value):
-        self._global_dof = global_dof
+    def __init__(self, global_dof: GlobalDoF, value):
+        self._global_dof: GlobalDoF = global_dof
         self._value = value
 
     @property
-    def global_dof(self):
+    def global_dof(self) -> GlobalDoF:
         return self._global_dof
 
     @property

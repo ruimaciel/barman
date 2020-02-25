@@ -45,17 +45,17 @@ class Parameter(Enum):
 class CoordinateSystem:
     """A coordinate system"""
 
-    def __init__(self, angle = 0):
+    def __init__(self, angle: float = 0):
         self.set_angle(angle)
 
 
-    def set_angle(self, angle):
+    def set_angle(self, angle: float):
         """Sets the rotation angle (in radians)""" 
 
         self._angle = angle
 
 
-    def get_transformation(self):
+    def get_transformation(self) -> numpy.array:
 
         c = cos(self._angle)
         s = sin(self._angle)
@@ -68,12 +68,12 @@ class CoordinateSystem:
 
         return T
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
             return self._angle == other._angle
         return False
 
-    def __ne__(self, other):
+    def __ne__(self, other) -> bool:
         return not self.__eq__(other)
 
     def __hash__(self):
@@ -85,7 +85,7 @@ class Node:
 
     def __init__(self, position):
         self._position = position
-        self._coordinate_system = CoordinateSystem()
+        self._coordinate_system: CoordinateSystem = CoordinateSystem()
 
 
     @property
@@ -94,18 +94,18 @@ class Node:
 
 
     @property
-    def coordinate_system(self):
+    def coordinate_system(self) -> CoordinateSystem:
         return self._coordinate_system
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
             return self.position == other.position and self.coordinate_system == other.coordinate_system
         return False
 
-    def __ne__(self, other):
+    def __ne__(self, other) -> bool:
         return not self.__eq__(other)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "Node({},{})".format(self.position[0], self.position[1])
 
     def __hash__(self):
@@ -115,8 +115,8 @@ class Node:
 class GlobalDoF:
     """Represents a degree of freedom (DoF) of a global model"""
 
-    def __init__(self, node, parameter):
-        self._node = node
+    def __init__(self, node: Node, parameter):
+        self._node: Node = node
         self._parameter = parameter
 
     def __eq__(self, other):
@@ -127,7 +127,7 @@ class GlobalDoF:
     def __ne__(self, other):
         return not self.__eq__(other)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "GlobalDof( ({},{}), {})".format(self._node.position[0], self._node.position[1], self._parameter)
 
     def __hash__(self):
@@ -137,7 +137,7 @@ class GlobalDoF:
 class GlobalDoFLink:
     """Links two GlobalDoF objects so that they are handled as the same GlobalDoF"""
 
-    def __init__(self, global_dof):
-        self._global_dofs = global_dof
+    def __init__(self, global_dof: GlobalDoF):
+        self._global_dofs: GlobalDoF = global_dof
 
 
