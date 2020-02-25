@@ -71,7 +71,7 @@ class CoordinateSystem:
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self._angle == other._angle
-        return false
+        return False
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -100,7 +100,7 @@ class Node:
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self.position == other.position and self.coordinate_system == other.coordinate_system
-        return false
+        return False
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -122,7 +122,7 @@ class GlobalDoF:
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self._node == other._node and self._parameter == other._parameter
-        return false
+        return False
 
     def __ne__(self, other):
         return not self.__eq__(other)
