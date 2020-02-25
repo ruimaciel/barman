@@ -19,36 +19,38 @@
 
 from abc import ABCMeta, abstractmethod
 
+from typing import List
 import numpy
 from math import sin, cos
 from numpy.linalg import norm
-from barman.dofs import Parameter, GlobalDoF
+from barman import materials
+from barman.dofs import Parameter, GlobalDoF, Node
 from barman.sections import Section
 
 
 class BarElement(metaclass=ABCMeta):
     """Defines the abstract base class used by all elements"""
 
-    def __init__(self, nodes, section, material):
-        self._nodes = nodes # two nodes: start node, and end node
-        self._section = section
-        self._material = material
+    def __init__(self, nodes: List[Node], section: Section, material: materials.LinearElastic):
+        self._nodes: List[Node] = nodes # two nodes: start node, and end node
+        self._section: Section = section
+        self._material: materials.LinearElastic = material
 
 
     @property
-    def nodes(self):
+    def nodes(self) -> List[Node]:
         return self._nodes
 
     @property
-    def section(self):
+    def section(self) -> Section:
         return self._section
 
     @property
-    def material(self):
+    def material(self) -> materials.LinearElastic:
         return self._material
 
     @abstractmethod
-    def get_length(self):
+    def get_length(self) -> float:
         pass
 
     @abstractmethod
@@ -89,7 +91,7 @@ class Bar2(BarElement):
         return global_dofs
 
 
-    def get_length(self):
+    def get_length(self) -> float:
         """Returns the length between end nodes"""
 
         xi = numpy.array(self.nodes[0].position)
@@ -97,7 +99,7 @@ class Bar2(BarElement):
         return norm(xf-xi)
 
 
-    def get_shape_functions(self, x):
+    def get_shape_functions(self, x: float):
         """Returns the shape function's values evaluated at x"""
 
         L = self.get_length()
@@ -110,9 +112,9 @@ class Bar2(BarElement):
     def get_local_stiffness_matrix(self):
         """Returns the element's stiffness matrix represented in the local coordinate system"""
 
-        E = self.material.young_modulus
-        EA = E*self.section.area
-        L = self.get_length()
+        E: float = self.material.young_modulus
+        EA: float = E*self.section.area
+        L: float = self.get_length()
 
         k = numpy.array(
             [[  EA/L, -EA/L],
@@ -125,11 +127,11 @@ class Bar2(BarElement):
     def get_local_mass_matrix(self):
         """Returns the element's mass matrix represented in the local coordinate system"""
 
-        A = self.section.area
-        rho = self.material.density
-        L = self.get_length()
+        A: float = self.section.area
+        rho: float = self.material.density
+        L: float = self.get_length()
 
-        rAL6 = rho*A*L/6.0
+        rAL6: float = rho*A*L/6.0
 
         m = rAL6*numpy.array(
             [[  2.0,  1.0],
@@ -142,7 +144,7 @@ class Bar2(BarElement):
     def get_transformation_matrix(self):
         """Returns the transformation matrix that transforms local coordinates into global coordinates"""
 
-        nodes = self.nodes
+        nodes: Node = self.nodes
         nf = numpy.array(nodes[-1].position)
         ni = numpy.array(nodes[0].position)
         r = nf-ni
@@ -170,7 +172,7 @@ class EulerBernoulli(BarElement):
         return global_dofs
 
 
-    def get_length(self):
+    def get_length(self) -> float:
         """Returns the length between end nodes"""
 
         xi = numpy.array(self.nodes[0].position)
@@ -178,7 +180,7 @@ class EulerBernoulli(BarElement):
         return norm(xf-xi)
 
 
-    def get_shape_functions(self, x):
+    def get_shape_functions(self, x: float) -> numpy.array:
         """Returns the shape function's values evaluated at x"""
 
         L = self.get_length()

@@ -23,20 +23,20 @@ class LinearElastic:
 
 
     def __init__(self, name, young_modulus, poisson_ratio):
-        self._name = name
-        self._young_modulus = young_modulus
-        self._poisson_ratio = poisson_ratio
-        self._density = 0.0
+        self._name: str = name
+        self._young_modulus: float = young_modulus
+        self._poisson_ratio: float = poisson_ratio
+        self._density: float = 0.0
 
     @property
-    def young_modulus(self):
+    def young_modulus(self) -> float:
         return self._young_modulus
 
     @property
-    def poisson_ratio(self):
+    def poisson_ratio(self) -> float:
         return self._poisson_ratio
 
     @property
-    def density(self):
+    def density(self) -> float:
         return self._density
 
