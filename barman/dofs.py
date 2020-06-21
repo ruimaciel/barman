@@ -45,11 +45,11 @@ class Parameter(Enum):
 class CoordinateSystem:
     """A coordinate system"""
 
-    def __init__(self, angle: float = 0):
+    def __init__(self, angle: float = 0) -> None:
         self.set_angle(angle)
 
 
-    def set_angle(self, angle: float):
+    def set_angle(self, angle: float) -> None:
         """Sets the rotation angle (in radians)""" 
 
         self._angle = angle
@@ -119,12 +119,12 @@ class GlobalDoF:
         self._node: Node = node
         self._parameter = parameter
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
             return self._node == other._node and self._parameter == other._parameter
         return False
 
-    def __ne__(self, other):
+    def __ne__(self, other) -> bool:
         return not self.__eq__(other)
 
     def __str__(self) -> str:

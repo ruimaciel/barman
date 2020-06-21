@@ -17,14 +17,15 @@
     along with Barman.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+from typing import List, Tuple
 from barman.dofs import GlobalDoF
 
 class PrescribedDisplacement:
     """Prescribes the displacement of a global degree of freedom (DoF)"""
 
-    def __init__(self, global_dof: GlobalDoF, value):
+    def __init__(self, global_dof: GlobalDoF, value: float):
         self._global_dof: GlobalDoF = global_dof
-        self._value = value
+        self._value: float = value
 
     @property
     def global_dof(self) -> GlobalDoF:
@@ -34,5 +35,5 @@ class PrescribedDisplacement:
     def value(self):
         return self._value
 
-    def get_values(self):
+    def get_values(self) -> List[Tuple[GlobalDoF, float]]:
         return [(self._global_dof, self._value)]

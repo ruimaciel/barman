@@ -17,7 +17,7 @@
     along with Barman.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from typing import List
+from typing import List, Tuple
 from barman.dofs import GlobalDoFLink
 from barman.elements import BarElement
 from barman.prescribed_displacements import PrescribedDisplacement
@@ -31,16 +31,16 @@ class Static:
         self.clear()
 
 
-    def clear(self):
+    def clear(self) -> None:
         """Clears all attributes."""
 
-        self._elements = []
-        self._prescribed_displacements = []
-        self._prescribed_forces = []
-        self._global_dof_links = [] # links between GlobalDoFs
+        self._elements: List[BarElement] = []
+        self._prescribed_displacements: List[PrescribedDisplacement] = []
+        self._prescribed_forces: List[PrescribedForce] = []
+        self._global_dof_links: List[GlobalDoFLink] = [] # links between GlobalDoFs
 
 
-    def append_element(self, element: BarElement):
+    def append_element(self, element: BarElement) -> None:
         """Appends an element to the element list"""
 
         self._elements.append(element)
@@ -53,7 +53,7 @@ class Static:
         return self._elements
 
 
-    def append_prescribed_displacement(self, prescribed_displacement: PrescribedDisplacement):
+    def append_prescribed_displacement(self, prescribed_displacement: PrescribedDisplacement) -> None:
         """Appends a prescribed displacement to the element list"""
 
         if not isinstance(prescribed_displacement, PrescribedDisplacement):
@@ -62,7 +62,7 @@ class Static:
         self._prescribed_displacements.append(prescribed_displacement)
 
 
-    def append_prescribed_force(self, prescribed_force: PrescribedForce):
+    def append_prescribed_force(self, prescribed_force: PrescribedForce) -> None:
         """Appends an element to the element list"""
 
         if not isinstance(prescribed_force, PrescribedForce):
@@ -85,7 +85,7 @@ class Static:
         return self._prescribed_forces
 
 
-    def append_global_dof_link(self, global_dof_link: GlobalDoFLink):
+    def append_global_dof_link(self, global_dof_link: GlobalDoFLink) -> None:
         """Appends a link between global degrees of freedom (DoF)"""
 
         self._global_dof_links.append(global_dof_link)
