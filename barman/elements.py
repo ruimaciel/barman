@@ -19,7 +19,7 @@
 
 from abc import ABCMeta, abstractmethod
 
-from typing import List
+from typing import List, Tuple
 import numpy
 from math import sin, cos
 from numpy.linalg import norm
@@ -54,22 +54,22 @@ class BarElement(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def get_global_dofs(self):
+    def get_global_dofs(self) -> List[GlobalDoF]:
         """Returns a list with the element's global degrees of freedom (DoF)"""
         pass
 
     @abstractmethod
-    def get_transformation_matrix(self):
+    def get_transformation_matrix(self) -> numpy.array:
         """Returns the transformation matrix that transforms local coordinates into global coordinates"""
         pass
 
     @abstractmethod
-    def get_local_stiffness_matrix(self):
+    def get_local_stiffness_matrix(self) -> numpy.array:
         """Returns the element's stiffness matrix represented in the local coordinate system"""
         pass
 
 
-    def get_global_stiffness_matrix(self):
+    def get_global_stiffness_matrix(self) -> numpy.array:
         """Returns the element's stiffness matrix represented in the global coordinate system"""
 
         T = self.get_transformation_matrix();
@@ -83,7 +83,7 @@ class BarElement(metaclass=ABCMeta):
 class Bar2(BarElement):
     """Bar2 beam element"""
 
-    def get_global_dofs(self):
+    def get_global_dofs(self) -> List[GlobalDoF]:
         """Returns a list with the element's global degrees of freedom (DoF)"""
 
         parameters = [ Parameter.dx, Parameter.dy]
@@ -109,7 +109,7 @@ class Bar2(BarElement):
         return N
 
 
-    def get_local_stiffness_matrix(self):
+    def get_local_stiffness_matrix(self) -> numpy.array:
         """Returns the element's stiffness matrix represented in the local coordinate system"""
 
         E: float = self.material.young_modulus
@@ -124,7 +124,7 @@ class Bar2(BarElement):
         return k
 
 
-    def get_local_mass_matrix(self):
+    def get_local_mass_matrix(self) -> numpy.array:
         """Returns the element's mass matrix represented in the local coordinate system"""
 
         A: float = self.section.area
@@ -141,10 +141,10 @@ class Bar2(BarElement):
         return m
 
 
-    def get_transformation_matrix(self):
+    def get_transformation_matrix(self) -> numpy.array:
         """Returns the transformation matrix that transforms local coordinates into global coordinates"""
 
-        nodes: Node = self.nodes
+        nodes: List[Node] = self.nodes
         nf = numpy.array(nodes[-1].position)
         ni = numpy.array(nodes[0].position)
         r = nf-ni
@@ -164,7 +164,7 @@ class Bar2(BarElement):
 class EulerBernoulli(BarElement):
     """Euler-Bernoulli (engineering) beam element"""
 
-    def get_global_dofs(self):
+    def get_global_dofs(self) -> List[GlobalDoF]:
         """Returns a list with the element's global degrees of freedom (DoF)"""
 
         parameters = [ Parameter.dx, Parameter.dy, Parameter.rz ]
@@ -197,7 +197,7 @@ class EulerBernoulli(BarElement):
         return N
 
 
-    def get_local_stiffness_matrix(self):
+    def get_local_stiffness_matrix(self) -> numpy.array:
         """Returns the element's stiffness matrix represented in the local coordinate system"""
 
         E = self.material.young_modulus
@@ -218,7 +218,7 @@ class EulerBernoulli(BarElement):
         return k
 
 
-    def get_local_mass_matrix(self):
+    def get_local_mass_matrix(self) -> numpy.array:
         """Returns the element's mass matrix represented in the local coordinate system"""
 
         A = self.section.area
@@ -241,7 +241,7 @@ class EulerBernoulli(BarElement):
 
 
 
-    def get_transformation_matrix(self):
+    def get_transformation_matrix(self) -> numpy.array:
         """Returns the transformation matrix that transforms local coordinates into global coordinates"""
 
         nodes = self.nodes

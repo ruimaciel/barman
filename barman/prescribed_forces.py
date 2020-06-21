@@ -17,12 +17,13 @@
     along with Barman.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+from typing import List, Tuple
 from barman.dofs import GlobalDoF
 
 class PrescribedForce:
     """Prescribes the force associated with a global degree of freedom (DoF)"""
 
-    def __init__(self, global_dof: GlobalDoF, value):
+    def __init__(self, global_dof: GlobalDoF, value: float):
         self._global_dof: GlobalDoF = global_dof
         self._value = value
 
@@ -34,5 +35,5 @@ class PrescribedForce:
     def value(self):
         return self._value
 
-    def get_values(self):
+    def get_values(self) -> List[Tuple[GlobalDoF, float]]:
         return [(self._global_dof, self._value)]

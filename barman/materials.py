@@ -22,7 +22,7 @@ class LinearElastic:
     """Represents a linear elastic material"""
 
 
-    def __init__(self, name, young_modulus, poisson_ratio):
+    def __init__(self, name: str, young_modulus: float, poisson_ratio: float):
         self._name: str = name
         self._young_modulus: float = young_modulus
         self._poisson_ratio: float = poisson_ratio
