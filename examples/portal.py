@@ -15,7 +15,7 @@ node = [
     Node([2,0])
 ]
 
-model = models.Static()
+model = Static()
 model.append_element( EulerBernoulli([node[0], node[1]], section, material) )
 model.append_element( EulerBernoulli([node[1], node[2]], section, material) )
 model.append_element( EulerBernoulli([node[2], node[3]], section, material) )
