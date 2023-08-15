@@ -42,3 +42,9 @@ jobs:
     - name: Check minimum test coverage rate
       run: |
         coverage report --fail-under=80
+    - name: Upload HTML report if check failed.
+      uses: actions/upload-artifact@v3
+      with:
+        name: html-report
+        path: htmlcov
+      if: ${{ failure() }}
